@@ -1,0 +1,12 @@
+{
+    "username":"admin@email.com",
+    "password":"admin@123",
+    "name":"Nikhil",
+    "intrest":["Cypress","Java","API"],
+    "gender":"Male",
+    "address":{
+                    "areaname":"abc",
+                    "city":"Udaipur"
+              }
+
+}
