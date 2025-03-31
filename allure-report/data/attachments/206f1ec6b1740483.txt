@@ -1,0 +1,73 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Verify Error Message
+- Location: C:\Users\HP\OneDrive\Desktop\Playwright\tests\VerifyErrorMessage.spec.js:4:1
+
+# Error details
+
+```
+Error: locator.type: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Username')
+
+    at C:\Users\HP\OneDrive\Desktop\Playwright\tests\VerifyErrorMessage.spec.js:10:45
+```
+
+# Page snapshot
+
+```yaml
+- img "company-branding"
+- heading "登录" [level=5]
+- paragraph: "Username : Admin"
+- paragraph: "Password : admin123"
+- text:  用户名
+- textbox "用户名"
+- text:  密码
+- textbox "密码"
+- button "登录"
+- paragraph: 忘了密码?
+- link
+- link
+- link
+- link
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc"
+  - text: . All rights reserved.
+- img "orangehrm-logo"
+```
+
+# Test source
+
+```ts
+   1 | const{test, expect}= require('@playwright/test')
+   2 | test.use({viewport:{width:1000,height:500}})
+   3 |
+   4 | test("Verify Error Message", async function({page}){
+   5 |     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+   6 |
+   7 |     console.log(await page.viewportSize().width);
+   8 |     console.log(await page.viewportSize().height);
+   9 |
+> 10 |     await page.getByPlaceholder("Username").type("Admin")
+     |                                             ^ Error: locator.type: Test timeout of 30000ms exceeded.
+  11 |     
+  12 |     await page.locator("input[name='password']").type("Admin123")
+  13 |     
+  14 |     await page.locator("//button[@type='submit']").click()
+  15 |
+  16 |     const ErrorMsg = await page.locator("//p[contains(@class,'alert-content-text')]").textContent()
+  17 |
+  18 |     console.log(ErrorMsg);
+  19 |     
+  20 |     expect(ErrorMsg.includes("Invalid")).toBeTruthy()
+  21 |     expect(ErrorMsg==="Invalid credentials").toBeTruthy()
+  22 | })
+```

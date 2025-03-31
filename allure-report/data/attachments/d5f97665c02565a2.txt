@@ -1,0 +1,81 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Read Data From JAson File
+- Location: C:\Users\HP\OneDrive\Desktop\Playwright\tests\Readdatajson.spec.js:5:1
+
+# Error details
+
+```
+Error: locator.fill: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//input[@id=\'pssword1\']')
+
+    at C:\Users\HP\OneDrive\Desktop\Playwright\tests\Readdatajson.spec.js:10:51
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - img "logo"
+  - heading "Learn Automation Courses" [level=1]
+  - img "menu"
+  - text: Learn Automation Courses
+  - img "delete"
+  - link "Home"
+  - link "Practise"
+- img "Login"
+- heading "Sign In" [level=2]
+- textbox "Enter Email": admin@email.com
+- textbox "Enter Password"
+- button "Sign in"
+- link "New user? Signup"
+- heading "Connect with us" [level=2]
+- link:
+  - img
+- link:
+  - img
+- link:
+  - img
+- link:
+  - img
+- link:
+  - img
+- heading "Learn Automation By Mukesh Otwani" [level=3]
+- heading "©2023 All rights reserved" [level=2]
+- link:
+  - img
+- link:
+  - img
+- link:
+  - img
+- link:
+  - img
+```
+
+# Test source
+
+```ts
+   1 | const {test, expect} = require('@playwright/test')
+   2 | const { parse } = require('path')
+   3 | const testdata = JSON.parse(JSON.stringify(require("../testdata.json")))//stringify method js value ko json me convert krta h
+   4 |
+   5 | test("Read Data From JAson File", async function({page}){
+   6 |
+   7 |     await page.goto("https://freelance-learn-automation.vercel.app/login")
+   8 |
+   9 |     await page.locator("//input[@id='email1']").fill(testdata.username)
+> 10 |     await page.locator("//input[@id='pssword1']").fill(testdata.password)
+     |                                                   ^ Error: locator.fill: Test timeout of 30000ms exceeded.
+  11 |
+  12 |
+  13 |
+  14 |
+  15 | })
+```

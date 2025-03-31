@@ -1,0 +1,43 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: File Uploade
+- Location: C:\Users\HP\OneDrive\Desktop\Playwright\tests\Fileupload.spec.js:3:1
+
+# Error details
+
+```
+Error: expect(locator).toHaveText(expected)
+
+Locator: locator('\\h3')
+Expected string: "File Uploaded!"
+Received string: ""
+Call log:
+  - expect.toHaveText with timeout 5000ms
+  - waiting for locator('\\h3')
+
+    at C:\Users\HP\OneDrive\Desktop\Playwright\tests\Fileupload.spec.js:9:41
+```
+
+# Test source
+
+```ts
+   1 | const {test, expect} = require('@playwright/test')
+   2 |
+   3 | test("File Uploade", async function({page}){
+   4 |
+   5 |     await page.goto("https://the-internet.herokuapp.com/upload")
+   6 |
+   7 |     await page.locator("#file-upload").setInputFiles("1741673923voucher.pdf")
+   8 |     await page.locator("#file-submit").click()
+>  9 |      expect(await page.locator("\\h3")).toHaveText("File Uploaded!")
+     |                                         ^ Error: expect(locator).toHaveText(expected)
+  10 |
+  11 |
+  12 | })
+```
